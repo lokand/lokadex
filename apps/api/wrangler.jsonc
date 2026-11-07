@@ -5,8 +5,8 @@
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
-  // Local development. Staging and production get their own blocks, with
-  // real database ids and the api./mcp. routes, once the resources exist.
+  // Local development; the production block below points at the real
+  // databases (created in Eastern US).
   "d1_databases": [
     {
       "binding": "CORE",
@@ -21,5 +21,25 @@
       "migrations_dir": "migrations/places"
     }
   ],
-  "vars": { "ENVIRONMENT": "development" }
+  "vars": { "ENVIRONMENT": "development" },
+  "env": {
+    // Routes (api. / mcp.) are added once the domain is bought.
+    "production": {
+      "d1_databases": [
+        {
+          "binding": "CORE",
+          "database_name": "lokadex-core",
+          "database_id": "d2fd1160-4f2b-472f-b996-34773d36f5b2",
+          "migrations_dir": "migrations/core"
+        },
+        {
+          "binding": "PLACES_TR",
+          "database_name": "lokadex-places-tr",
+          "database_id": "3f3ca23d-7382-4523-8823-baaf17baa3ae",
+          "migrations_dir": "migrations/places"
+        }
+      ],
+      "vars": { "ENVIRONMENT": "production" }
+    }
+  }
 }
