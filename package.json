@@ -8,6 +8,7 @@
     "dev:api": "pnpm --filter @lokadex/api dev"
   },
   "devDependencies": {
+    "tsx": "^4.23.15",
     "turbo": "^2.5.0",
     "typescript": "^6.0.3"
   }

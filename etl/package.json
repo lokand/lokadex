@@ -1,0 +1,7 @@
+{
+  "name": "@lokadex/etl",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": { "@lokadex/core": "workspace:*" }
+}
