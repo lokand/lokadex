@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lokadex-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  // Local development. Staging and production get their own blocks, with
+  // real database ids and the api./mcp. routes, once the resources exist.
+  "d1_databases": [
+    {
+      "binding": "CORE",
+      "database_name": "lokadex-core",
+      "database_id": "local-lokadex-core",
+      "migrations_dir": "migrations/core"
+    },
+    {
+      "binding": "PLACES_TR",
+      "database_name": "lokadex-places-tr",
+      "database_id": "local-lokadex-places-tr",
+      "migrations_dir": "migrations/places"
+    }
+  ],
+  "vars": { "ENVIRONMENT": "development" }
+}

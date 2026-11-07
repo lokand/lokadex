@@ -1,0 +1,178 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://kirmizi.lokand.co/#place",
+      "@type": "Restaurant",
+      "name": "Kırmızı Meyhane",
+      "url": "https://kirmizi.lokand.co/",
+      "description": "Meze ve balık, Moda'da.",
+      "telephone": "+90 216 000 00 00",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Moda Cd. 12",
+        "addressLocality": "Kadıköy",
+        "addressRegion": "İstanbul",
+        "addressCountry": "TR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.9906,
+        "longitude": 29.0283
+      },
+      "servesCuisine": [
+        "Meze",
+        "Balık ve deniz ürünleri"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/kirmizimeyhane"
+      ],
+      "currenciesAccepted": "TRY",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday"
+          ],
+          "opens": "17:00",
+          "closes": "01:00"
+        }
+      ],
+      "identifier": "biz_kirmizi",
+      "hasMenu": [
+        {
+          "@id": "https://kirmizi.lokand.co/#menu-m1"
+        }
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "category",
+          "value": "meyhane"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "cuisines",
+          "value": [
+            "meze",
+            "seafood"
+          ]
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "timezone",
+          "value": "Europe/Istanbul"
+        }
+      ]
+    },
+    {
+      "@id": "https://kirmizi.lokand.co/#menu-m1",
+      "@type": "Menu",
+      "name": "Akşam",
+      "inLanguage": "tr",
+      "url": "https://kirmizi.lokand.co/menu",
+      "hasMenuSection": [
+        {
+          "@type": "MenuSection",
+          "name": "Mezeler",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Humus",
+              "suitableForDiet": [
+                "https://schema.org/VeganDiet",
+                "https://schema.org/GlutenFreeDiet"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "price": "120.00",
+                "priceCurrency": "TRY"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "allergens",
+                  "value": [
+                    "sesame"
+                  ]
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "dietaryTags",
+                  "value": [
+                    "vegan",
+                    "gluten_free"
+                  ]
+                }
+              ]
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Lakerda",
+              "offers": {
+                "@type": "Offer",
+                "price": "260.00",
+                "priceCurrency": "TRY",
+                "availability": "https://schema.org/SoldOut"
+              },
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "allergens",
+                  "value": [
+                    "fish"
+                  ]
+                }
+              ]
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Rakı",
+              "offers": [
+                {
+                  "@type": "Offer",
+                  "name": "Tek",
+                  "price": "300.00",
+                  "priceCurrency": "TRY"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Duble",
+                  "price": "520.00",
+                  "priceCurrency": "TRY"
+                }
+              ],
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "contains",
+                  "value": [
+                    "alcohol"
+                  ]
+                }
+              ]
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Günün çorbası",
+              "suitableForDiet": [
+                "https://schema.org/VegetarianDiet"
+              ],
+              "additionalProperty": [
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "dietaryTags",
+                  "value": [
+                    "vegetarian",
+                    "spicy"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

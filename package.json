@@ -1,0 +1,14 @@
+{
+  "name": "lokadex",
+  "private": true,
+  "packageManager": "pnpm@10.23.0",
+  "scripts": {
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "dev:api": "pnpm --filter @lokadex/api dev"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^6.0.3"
+  }
+}
