@@ -21,6 +21,9 @@ beforeAll(async () => {
   )
     .bind(KADIKOY.lat, KADIKOY.lng)
     .run();
+  await env.CORE.prepare(
+    "INSERT INTO area (id, metro, name, name_folded, kind, lat, lng, radius_m) VALUES ('ist', 'istanbul', 'İstanbul Havalimanı', 'istanbul havalimani', 'landmark', 41.262, 28.742, 2500)",
+  ).run();
   await place("s1", "Akito Suşi", { cuisines: ["sushi", "japanese"] });
   await place("s2", "Far Sushi", { cuisines: ["sushi"], lat: KADIKOY.lat + 0.03 });
   await place("k1", "Kebapçı Halil", { cuisines: ["kebab", "halal"] });
@@ -69,6 +72,10 @@ describe("search", () => {
     expect(res.status).toBe(400);
     expect(((await res.json()) as any).error).toBe("no_location");
     expect((await search("q=sushi&near=atlantis")).error).toBe("unknown_area");
+    expect((await search(`q=sushi&near=${encodeURIComponent("İstanbul")}`)).error).toBe("too_broad");
+    expect((await search("q=sushi%20istanbul")).error).toBe("no_location");
+    expect((await search("q=sushi&near=havalimani")).error).toBe("unknown_area");
+    expect((await search(`q=sushi&near=${encodeURIComponent("istanbul havalimanı")}`)).query.near).toBe("İstanbul Havalimanı");
     expect((await search("q=sushi&lat=48.85&lng=2.35")).error).toBe("out_of_coverage");
   });
 

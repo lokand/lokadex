@@ -7,6 +7,7 @@ import {
   FILLER,
   ftsTerms,
   MAX_RADIUS_M,
+  METROS,
   metroAt,
   openState,
   parseQuery,
@@ -31,7 +32,7 @@ export type SearchParams = {
 };
 
 export class SearchError extends Error {
-  constructor(public code: "no_location" | "unknown_area" | "out_of_coverage", message: string) {
+  constructor(public code: "no_location" | "unknown_area" | "out_of_coverage" | "too_broad", message: string) {
     super(message);
   }
 }
@@ -61,33 +62,44 @@ type PlaceRow = {
 const COLS =
   "p.rowid, p.id, p.name, p.lat, p.lng, p.street, p.locality, p.category, p.cuisines, p.diets, p.phone, p.website, p.hours, p.timezone, p.label, p.best_source, p.updated_at";
 
+// FTS gives candidates; an area only counts when the text names all of it
+// ("istanbul" must not land on "İstanbul Havalimanı").
 async function findArea(env: Env, text: string): Promise<Center | null> {
-  const match = ftsTerms(tokens(text));
+  const words = tokens(text);
+  const match = ftsTerms(words);
   if (!match) return null;
-  const row = await env.CORE.prepare(
-    `SELECT a.name, a.lat, a.lng, a.radius_m FROM area_fts f JOIN area a ON a.rowid = f.rowid
-     WHERE area_fts MATCH ? ORDER BY bm25(area_fts), a.radius_m DESC LIMIT 1`,
+  const { results } = await env.CORE.prepare(
+    `SELECT a.name, a.name_folded, a.lat, a.lng, a.radius_m FROM area_fts f JOIN area a ON a.rowid = f.rowid
+     WHERE area_fts MATCH ? ORDER BY bm25(area_fts), a.radius_m DESC LIMIT 10`,
   )
     .bind(match)
-    .first<{ name: string; lat: number; lng: number; radius_m: number }>();
+    .all<{ name: string; name_folded: string; lat: number; lng: number; radius_m: number }>();
+  const row = results.find((a) => {
+    const parts = a.name_folded.split(/\s+/);
+    return parts.length <= words.length && parts.every((part) => words.some((w) => part.startsWith(w)));
+  });
   return row ? { name: row.name, lat: row.lat, lng: row.lng, radiusM: row.radius_m } : null;
 }
+
+const isMetroName = (text: string) => METROS.some((m) => fold(m.name) === fold(text) || m.id === fold(text));
 
 async function resolveCenter(env: Env, p: SearchParams, leftover: string[]): Promise<{ center: Center; terms: string[] }> {
   if (typeof p.lat === "number" && typeof p.lng === "number") {
     return { center: { name: null, lat: p.lat, lng: p.lng, radiusM: 1500 }, terms: leftover };
   }
   if (p.near?.trim()) {
+    if (isMetroName(p.near)) throw new SearchError("too_broad", `"${p.near}" is a whole city. Name a district or neighbourhood, like Kadıköy or Beşiktaş, or pass lat/lng.`);
     const area = await findArea(env, p.near);
     if (!area) throw new SearchError("unknown_area", `Couldn't find "${p.near}". Try a district like Kadıköy or Beşiktaş, or pass lat/lng.`);
     return { center: area, terms: leftover };
   }
   // "sushi kadıköy": a query word that names an area becomes the location.
-  for (const word of leftover) {
+  const rest = leftover.filter((w) => !isMetroName(w));
+  for (const word of rest) {
     const area = await findArea(env, word);
-    if (area && area.name && fold(area.name) === word) return { center: area, terms: leftover.filter((w) => w !== word) };
+    if (area && area.name && fold(area.name) === word) return { center: area, terms: rest.filter((w) => w !== word) };
   }
-  throw new SearchError("no_location", "Say where: pass `near` (e.g. Kadıköy) or `lat` and `lng`.");
+  throw new SearchError("no_location", rest.length < leftover.length ? "İstanbul is a whole city. Name a district or neighbourhood, like Kadıköy or Beşiktaş." : "Say where: pass `near` (e.g. Kadıköy) or `lat` and `lng`.");
 }
 
 export async function searchPlaces(env: Env, p: SearchParams) {
