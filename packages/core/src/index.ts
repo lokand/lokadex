@@ -5,3 +5,4 @@ export * from "./trust";
 export * from "./rank";
 export * from "./metros";
 export * from "./diets";
+export * from "./query";

@@ -26,6 +26,8 @@
   "env": {
     // Routes (api. / mcp.) are added once the domain is bought.
     "production": {
+      "workers_dev": true,
+      "observability": { "enabled": true },
       "d1_databases": [
         {
           "binding": "CORE",

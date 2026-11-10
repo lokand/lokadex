@@ -1,0 +1,611 @@
+[
+{
+"name": "Adalar",
+"kind": "district",
+"lat": 40.8777,
+"lng": 29.1186,
+"radius_m": 3000
+},
+{
+"name": "Arnavutköy",
+"kind": "district",
+"lat": 41.1825,
+"lng": 28.7445,
+"radius_m": 4800
+},
+{
+"name": "Ataşehir",
+"kind": "district",
+"lat": 40.9885,
+"lng": 29.1146,
+"radius_m": 2500
+},
+{
+"name": "Avcılar",
+"kind": "district",
+"lat": 40.9825,
+"lng": 28.7195,
+"radius_m": 2500
+},
+{
+"name": "Bağcılar",
+"kind": "district",
+"lat": 41.0346,
+"lng": 28.847,
+"radius_m": 2500
+},
+{
+"name": "Bahçelievler",
+"kind": "district",
+"lat": 41.0024,
+"lng": 28.8594,
+"radius_m": 2500
+},
+{
+"name": "Bakırköy",
+"kind": "district",
+"lat": 40.9793,
+"lng": 28.8721,
+"radius_m": 2500
+},
+{
+"name": "Başakşehir",
+"kind": "district",
+"lat": 41.0932,
+"lng": 28.7876,
+"radius_m": 3500
+},
+{
+"name": "Bayrampaşa",
+"kind": "district",
+"lat": 41.0463,
+"lng": 28.8992,
+"radius_m": 2000
+},
+{
+"name": "Beşiktaş",
+"kind": "district",
+"lat": 41.0486,
+"lng": 29.0084,
+"radius_m": 2000
+},
+{
+"name": "Beykoz",
+"kind": "district",
+"lat": 41.1105,
+"lng": 29.0975,
+"radius_m": 4000
+},
+{
+"name": "Beylikdüzü",
+"kind": "district",
+"lat": 41.0068,
+"lng": 28.6463,
+"radius_m": 3000
+},
+{
+"name": "Beyoğlu",
+"kind": "district",
+"lat": 41.0331,
+"lng": 28.9778,
+"radius_m": 2000
+},
+{
+"name": "Büyükçekmece",
+"kind": "district",
+"lat": 41.0172,
+"lng": 28.5866,
+"radius_m": 4000
+},
+{
+"name": "Çatalca",
+"kind": "district",
+"lat": 41.1438,
+"lng": 28.4621,
+"radius_m": 4800
+},
+{
+"name": "Çekmeköy",
+"kind": "district",
+"lat": 41.0305,
+"lng": 29.1908,
+"radius_m": 3000
+},
+{
+"name": "Esenler",
+"kind": "district",
+"lat": 41.0386,
+"lng": 28.8812,
+"radius_m": 2000
+},
+{
+"name": "Esenyurt",
+"kind": "district",
+"lat": 41.0221,
+"lng": 28.6682,
+"radius_m": 3000
+},
+{
+"name": "Eyüpsultan",
+"kind": "district",
+"lat": 41.048,
+"lng": 28.934,
+"radius_m": 3500
+},
+{
+"name": "Fatih",
+"kind": "district",
+"lat": 41.0146,
+"lng": 28.9529,
+"radius_m": 2500
+},
+{
+"name": "Gaziosmanpaşa",
+"kind": "district",
+"lat": 41.0631,
+"lng": 28.9114,
+"radius_m": 2000
+},
+{
+"name": "Güngören",
+"kind": "district",
+"lat": 41.0191,
+"lng": 28.8774,
+"radius_m": 1500
+},
+{
+"name": "Kadıköy",
+"kind": "district",
+"lat": 40.986,
+"lng": 29.0387,
+"radius_m": 2500
+},
+{
+"name": "Kağıthane",
+"kind": "district",
+"lat": 41.0829,
+"lng": 28.9813,
+"radius_m": 2500
+},
+{
+"name": "Kartal",
+"kind": "district",
+"lat": 40.9004,
+"lng": 29.1873,
+"radius_m": 3000
+},
+{
+"name": "Küçükçekmece",
+"kind": "district",
+"lat": 41.0054,
+"lng": 28.7878,
+"radius_m": 3500
+},
+{
+"name": "Maltepe",
+"kind": "district",
+"lat": 40.928,
+"lng": 29.1326,
+"radius_m": 3000
+},
+{
+"name": "Pendik",
+"kind": "district",
+"lat": 40.8821,
+"lng": 29.2619,
+"radius_m": 3500
+},
+{
+"name": "Sancaktepe",
+"kind": "district",
+"lat": 41.0075,
+"lng": 29.218,
+"radius_m": 3000
+},
+{
+"name": "Sarıyer",
+"kind": "district",
+"lat": 41.167,
+"lng": 29.05,
+"radius_m": 4000
+},
+{
+"name": "Silivri",
+"kind": "district",
+"lat": 41.073,
+"lng": 28.246,
+"radius_m": 4800
+},
+{
+"name": "Sultanbeyli",
+"kind": "district",
+"lat": 40.9677,
+"lng": 29.2661,
+"radius_m": 2500
+},
+{
+"name": "Sultangazi",
+"kind": "district",
+"lat": 41.1023,
+"lng": 28.8667,
+"radius_m": 2500
+},
+{
+"name": "Şile",
+"kind": "district",
+"lat": 41.176,
+"lng": 29.613,
+"radius_m": 4800
+},
+{
+"name": "Şişli",
+"kind": "district",
+"lat": 41.0602,
+"lng": 28.9923,
+"radius_m": 2000
+},
+{
+"name": "Tuzla",
+"kind": "district",
+"lat": 40.8266,
+"lng": 29.3061,
+"radius_m": 4000
+},
+{
+"name": "Ümraniye",
+"kind": "district",
+"lat": 41.0214,
+"lng": 29.1172,
+"radius_m": 3000
+},
+{
+"name": "Üsküdar",
+"kind": "district",
+"lat": 41.023,
+"lng": 29.0395,
+"radius_m": 2500
+},
+{
+"name": "Zeytinburnu",
+"kind": "district",
+"lat": 40.9954,
+"lng": 28.9056,
+"radius_m": 2000
+},
+{
+"name": "Moda",
+"kind": "neighbourhood",
+"lat": 40.9846,
+"lng": 29.0249,
+"radius_m": 800
+},
+{
+"name": "Karaköy",
+"kind": "neighbourhood",
+"lat": 41.0242,
+"lng": 28.9773,
+"radius_m": 700
+},
+{
+"name": "Galata",
+"kind": "neighbourhood",
+"lat": 41.0239,
+"lng": 28.9741,
+"radius_m": 600
+},
+{
+"name": "Cihangir",
+"kind": "neighbourhood",
+"lat": 41.0312,
+"lng": 28.9825,
+"radius_m": 600
+},
+{
+"name": "Taksim",
+"kind": "neighbourhood",
+"lat": 41.0362,
+"lng": 28.9834,
+"radius_m": 800
+},
+{
+"name": "Nişantaşı",
+"kind": "neighbourhood",
+"lat": 41.0512,
+"lng": 28.9926,
+"radius_m": 800
+},
+{
+"name": "Bebek",
+"kind": "neighbourhood",
+"lat": 41.0772,
+"lng": 29.0438,
+"radius_m": 800
+},
+{
+"name": "Ortaköy",
+"kind": "neighbourhood",
+"lat": 41.0485,
+"lng": 29.0257,
+"radius_m": 700
+},
+{
+"name": "Arnavutköy Bosphorus",
+"kind": "neighbourhood",
+"lat": 41.066,
+"lng": 29.042,
+"radius_m": 600
+},
+{
+"name": "Etiler",
+"kind": "neighbourhood",
+"lat": 41.0797,
+"lng": 29.0314,
+"radius_m": 1200
+},
+{
+"name": "Levent",
+"kind": "neighbourhood",
+"lat": 41.0796,
+"lng": 29.0138,
+"radius_m": 1200
+},
+{
+"name": "Maslak",
+"kind": "neighbourhood",
+"lat": 41.1134,
+"lng": 29.0179,
+"radius_m": 1200
+},
+{
+"name": "Sultanahmet",
+"kind": "neighbourhood",
+"lat": 41.0078,
+"lng": 28.9768,
+"radius_m": 800
+},
+{
+"name": "Eminönü",
+"kind": "neighbourhood",
+"lat": 41.0165,
+"lng": 28.9707,
+"radius_m": 700
+},
+{
+"name": "Balat",
+"kind": "neighbourhood",
+"lat": 41.0316,
+"lng": 28.9484,
+"radius_m": 700
+},
+{
+"name": "Fener",
+"kind": "neighbourhood",
+"lat": 41.034,
+"lng": 28.951,
+"radius_m": 500
+},
+{
+"name": "Kuzguncuk",
+"kind": "neighbourhood",
+"lat": 41.0351,
+"lng": 29.0303,
+"radius_m": 500
+},
+{
+"name": "Çengelköy",
+"kind": "neighbourhood",
+"lat": 41.0502,
+"lng": 29.054,
+"radius_m": 700
+},
+{
+"name": "Caddebostan",
+"kind": "neighbourhood",
+"lat": 40.9667,
+"lng": 29.0659,
+"radius_m": 1000
+},
+{
+"name": "Fenerbahçe",
+"kind": "neighbourhood",
+"lat": 40.9739,
+"lng": 29.0418,
+"radius_m": 800
+},
+{
+"name": "Suadiye",
+"kind": "neighbourhood",
+"lat": 40.9618,
+"lng": 29.0817,
+"radius_m": 1000
+},
+{
+"name": "Bağdat Caddesi",
+"kind": "street",
+"lat": 40.9614,
+"lng": 29.0799,
+"radius_m": 2500
+},
+{
+"name": "Kalamış",
+"kind": "neighbourhood",
+"lat": 40.9764,
+"lng": 29.0411,
+"radius_m": 700
+},
+{
+"name": "Yeldeğirmeni",
+"kind": "neighbourhood",
+"lat": 40.9952,
+"lng": 29.0292,
+"radius_m": 500
+},
+{
+"name": "Kurtuluş",
+"kind": "neighbourhood",
+"lat": 41.0476,
+"lng": 28.9818,
+"radius_m": 800
+},
+{
+"name": "Mecidiyeköy",
+"kind": "neighbourhood",
+"lat": 41.0675,
+"lng": 28.9958,
+"radius_m": 900
+},
+{
+"name": "Bomonti",
+"kind": "neighbourhood",
+"lat": 41.0578,
+"lng": 28.9804,
+"radius_m": 700
+},
+{
+"name": "Kurtköy",
+"kind": "neighbourhood",
+"lat": 40.9174,
+"lng": 29.3015,
+"radius_m": 1500
+},
+{
+"name": "Florya",
+"kind": "neighbourhood",
+"lat": 40.9801,
+"lng": 28.7953,
+"radius_m": 1200
+},
+{
+"name": "Yeşilköy",
+"kind": "neighbourhood",
+"lat": 40.9604,
+"lng": 28.8227,
+"radius_m": 1200
+},
+{
+"name": "Bahçeşehir",
+"kind": "neighbourhood",
+"lat": 41.0667,
+"lng": 28.6872,
+"radius_m": 2000
+},
+{
+"name": "Göztepe",
+"kind": "neighbourhood",
+"lat": 40.9824,
+"lng": 29.0644,
+"radius_m": 900
+},
+{
+"name": "Acıbadem",
+"kind": "neighbourhood",
+"lat": 41.0026,
+"lng": 29.0476,
+"radius_m": 900
+},
+{
+"name": "Kozyatağı",
+"kind": "neighbourhood",
+"lat": 40.9709,
+"lng": 29.0948,
+"radius_m": 900
+},
+{
+"name": "Altunizade",
+"kind": "neighbourhood",
+"lat": 41.021,
+"lng": 29.0395,
+"radius_m": 800
+},
+{
+"name": "Rumelihisarı",
+"kind": "neighbourhood",
+"lat": 41.0866,
+"lng": 29.049,
+"radius_m": 600
+},
+{
+"name": "İstinye",
+"kind": "neighbourhood",
+"lat": 41.1141,
+"lng": 29.0525,
+"radius_m": 800
+},
+{
+"name": "Tarabya",
+"kind": "neighbourhood",
+"lat": 41.1381,
+"lng": 29.0529,
+"radius_m": 800
+},
+{
+"name": "Kumkapı",
+"kind": "neighbourhood",
+"lat": 41.0042,
+"lng": 28.9647,
+"radius_m": 500
+},
+{
+"name": "Cevahir",
+"kind": "landmark",
+"lat": 41.064,
+"lng": 28.992,
+"radius_m": 400
+},
+{
+"name": "Kanyon",
+"kind": "landmark",
+"lat": 41.078,
+"lng": 29.011,
+"radius_m": 400
+},
+{
+"name": "Zorlu Center",
+"kind": "landmark",
+"lat": 41.067,
+"lng": 29.017,
+"radius_m": 400
+},
+{
+"name": "İstiklal Caddesi",
+"kind": "street",
+"lat": 41.034,
+"lng": 28.9788,
+"radius_m": 900
+},
+{
+"name": "Galataport",
+"kind": "landmark",
+"lat": 41.026,
+"lng": 28.982,
+"radius_m": 500
+},
+{
+"name": "Kapalıçarşı",
+"kind": "landmark",
+"lat": 41.011,
+"lng": 28.968,
+"radius_m": 500
+},
+{
+"name": "Haydarpaşa",
+"kind": "landmark",
+"lat": 40.997,
+"lng": 29.019,
+"radius_m": 500
+},
+{
+"name": "Sabiha Gökçen",
+"kind": "landmark",
+"lat": 40.899,
+"lng": 29.309,
+"radius_m": 1500
+},
+{
+"name": "İstanbul Havalimanı",
+"kind": "landmark",
+"lat": 41.262,
+"lng": 28.742,
+"radius_m": 2500
+}
+]

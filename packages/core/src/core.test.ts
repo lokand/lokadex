@@ -150,3 +150,21 @@ describe("diets", () => {
     expect(dietTags(dietMask(["vegan", "gluten_free", "made_up"]))).toEqual(["vegan", "gluten_free"]);
   });
 });
+
+describe("parseQuery", () => {
+  it("turns words into filters in Turkish and English", async () => {
+    const { parseQuery, ftsTerms } = await import("./index");
+    expect(parseQuery("vegan kebap near Kadıköy")).toEqual({
+      terms: ["kadikoy"],
+      cuisines: ["vegan", "kebab"],
+      categories: [],
+      diets: [],
+    });
+    expect(parseQuery("Balık restoranı")).toMatchObject({ cuisines: ["seafood"], terms: [] });
+    expect(parseQuery("KUAFÖR")).toMatchObject({ categories: ["hair_salon"] });
+    expect(parseQuery("gluten free pizza")).toMatchObject({ diets: ["gluten_free"], cuisines: ["pizza"] });
+    expect(parseQuery("Çiya Sofrası")).toMatchObject({ terms: ["ciya", "sofrasi"] });
+    expect(ftsTerms(['ciya" OR x', "s"])).toBe('"ciyaORx"*');
+    expect(ftsTerms([])).toBeNull();
+  });
+});
