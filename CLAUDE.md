@@ -1,5 +1,30 @@
 # CLAUDE.md
 
+## Why it exists
+
+Lokadex is Lokand's Context7: a free, open index whose job is to make
+Lokand's restaurants the best-answered places in AI assistants, and so give
+owners a reason to join Lokand. It is not a revenue line. Success is Lokand
+sign-ups it brings in (`src=lokadex`), not API traffic or paid keys.
+
+- **The moat is offering-level data, not listings.** Plain "sushi near
+  Kadıköy" is already answered by built-in assistant search and Google
+  Maps MCPs; open data alone makes us a weaker Google Places. What nobody
+  has is fresh dishes, prices, diets and hours ("iskender under 400 TL,
+  open now, near Moda"). Prioritise work that adds or surfaces that data.
+- **Priority order:** (1) Lokand ingest: pings and the feed reconcile.
+  (2) Menus from restaurants' own websites (schema.org first). (3) Quality:
+  dedupe, ranking, phones, hours, and a fixed Turkish and English query
+  set. (4) One dish-level demo no one else can match. Then distribution:
+  the MCP Registry, Claude and ChatGPT directories, Glama and Smithery,
+  district pages for AI search, Show HN and Turkish press.
+- **The owner loop is the payoff.** Count impressions per place so the
+  Lokand dashboard can show owners "AI assistants showed you N×".
+- **Time-boxed.** Lokadex is only as good as Lokand's supply, and Lokand
+  onboarding is the main business. Keep it cheap until a few hundred
+  Istanbul places have live menus; don't build features that only pay
+  off at scale before then.
+
 Lokadex is an open index of places and their offerings for AI agents, run by
 Lokand on Cloudflare Workers. Lokand (`lokand/monorepo`) is publisher #1;
 see its `docs/place-publishing.md` for what publishers send.
