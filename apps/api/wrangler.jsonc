@@ -1,12 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "lokadex-api",
+  "account_id": "aab519b88bd28d659f9823871b87de51",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
   // Local development; the production block below points at the real
-  // databases (created in Eastern US).
+  // databases in the Lokadex Cloudflare account (Eastern US).
   "d1_databases": [
     {
       "binding": "CORE",
@@ -29,13 +30,13 @@
         {
           "binding": "CORE",
           "database_name": "lokadex-core",
-          "database_id": "d2fd1160-4f2b-472f-b996-34773d36f5b2",
+          "database_id": "a52948de-b166-4e78-a22f-e0ed59f90bc1",
           "migrations_dir": "migrations/core"
         },
         {
           "binding": "PLACES_TR",
           "database_name": "lokadex-places-tr",
-          "database_id": "3f3ca23d-7382-4523-8823-baaf17baa3ae",
+          "database_id": "97c16f23-1588-4208-aae0-ec56c2cf070c",
           "migrations_dir": "migrations/places"
         }
       ],
