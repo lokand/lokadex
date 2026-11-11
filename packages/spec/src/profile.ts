@@ -28,6 +28,11 @@ export type PlaceProfile = {
   url: string | null;
   description: string | null;
   telephone: string | null;
+  email: string | null;
+  // https URLs only: the logo/avatar and photos every profile surface shows.
+  logo: string | null;
+  images: string[];
+  priceRange: string | null;
   lat: number | null;
   lng: number | null;
   address: {
@@ -111,6 +116,19 @@ function strings(v: unknown, max = 50): string[] {
     .map((x) => text(x, 120))
     .filter((x): x is string => !!x)
     .slice(0, max);
+}
+
+const MAX_IMAGES = 20;
+
+function imageUrl(v: unknown): string | null {
+  const u = isNode(v) ? (v.contentUrl ?? v.url) : v;
+  const t = text(u, 1000);
+  if (!t) return null;
+  try {
+    return new URL(t).protocol === "https:" ? t : null;
+  } catch {
+    return null;
+  }
 }
 
 function hhmm(v: unknown): string | null {
@@ -230,6 +248,13 @@ export function parsePlaceProfile(doc: unknown): PlaceProfile | null {
     url: text(place.url, 500),
     description: text(place.description),
     telephone: text(place.telephone, 40),
+    email: (() => {
+      const e = text(place.email, 254)?.replace(/^mailto:/i, "") ?? null;
+      return e && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) ? e : null;
+    })(),
+    logo: imageUrl(list(place.logo)[0]),
+    images: [...new Set(list(place.image).map(imageUrl).filter((u): u is string => !!u))].slice(0, MAX_IMAGES),
+    priceRange: text(place.priceRange, 20),
     lat: validGeo ? lat : null,
     lng: validGeo ? lng : null,
     address: address && Object.keys(address).length ? address : null,

@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import type { Env } from "./env";
+import { checkControl, ControlError } from "./control";
 import { mcpHandler } from "./mcp";
 import { PAGE } from "./page";
 import { ATTRIBUTION, getPlace, SearchError, searchPlaces } from "./search";
@@ -18,6 +19,8 @@ app.get("/", (c) =>
     endpoints: {
       search: "/v1/places/search?q=sushi&near=Kadıköy",
       place: "/v1/places/{id}",
+      control: "/v1/control?domain=example.com&publisher=https://lokand.com&place={id}",
+      spec: "https://github.com/lokand/lokadex/blob/main/docs/spec.md",
       mcp: "/mcp",
     },
     coverage: ["istanbul"],
@@ -51,6 +54,16 @@ app.get("/v1/places/search", async (c) => {
 app.get("/v1/places/:id", async (c) => {
   const place = await getPlace(c.env, c.req.param("id"));
   return place ? c.json(place, 200, { "cache-control": "public, max-age=60" }) : c.json({ error: "not_found" }, 404);
+});
+
+app.get("/v1/control", async (c) => {
+  const q = c.req.query();
+  try {
+    return c.json(await checkControl({ domain: q.domain, publisher: q.publisher, place: q.place }), 200, { "cache-control": "no-store" });
+  } catch (e) {
+    if (e instanceof ControlError) return c.json({ error: e.code, message: e.message }, 400);
+    throw e;
+  }
 });
 
 app.all("/mcp", (c) => mcpHandler(c.env, c.req.raw));

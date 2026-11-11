@@ -1,3 +1,4 @@
+import { checkControl, ControlError } from "./control";
 import { getPlace, SearchError, searchPlaces } from "./search";
 import type { Env } from "./env";
 
@@ -32,6 +33,22 @@ const TOOLS = [
     inputSchema: { type: "object", properties: { id: { type: "string" } }, required: ["id"] },
     annotations: { title: "Get place", readOnlyHint: true, openWorldHint: false },
   },
+  {
+    name: "check_place_control",
+    title: "Check who speaks for a place",
+    description:
+      "Check what a business's website domain says about who publishes its profile: its /.well-known/lokadex.json and its _lokadex DNS TXT record. Give a publisher (and optionally its place id) to see which control proofs hold. Use this when helping an owner connect their place to a publisher or agency.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        domain: { type: "string", description: "The business's website, e.g. \"kirmizi.com.tr\"." },
+        publisher: { type: "string", description: "A publisher origin, e.g. \"https://lokand.com\"." },
+        place: { type: "string", description: "The place's id at that publisher." },
+      },
+      required: ["domain"],
+    },
+    annotations: { title: "Check who speaks for a place", readOnlyHint: true, openWorldHint: true },
+  },
 ];
 
 type Rpc = { jsonrpc: "2.0"; id?: string | number | null; method: string; params?: Record<string, unknown> };
@@ -61,7 +78,12 @@ async function callTool(env: Env, name: string, args: Record<string, unknown>) {
       const place = typeof args.id === "string" ? await getPlace(env, args.id) : null;
       return place ? text(place) : text({ error: "not_found" }, true);
     }
+    if (name === "check_place_control") {
+      const str = (v: unknown) => (typeof v === "string" ? v : undefined);
+      return text(await checkControl({ domain: str(args.domain), publisher: str(args.publisher), place: str(args.place) }));
+    }
   } catch (e) {
+    if (e instanceof ControlError) return text({ error: e.code, message: e.message }, true);
     if (e instanceof SearchError) return text({ error: e.code, message: e.message }, true);
     throw e;
   }
