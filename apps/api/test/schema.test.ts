@@ -49,7 +49,7 @@ describe("core schema", () => {
       "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE '%_fts%' AND name NOT LIKE 'd1_%' AND name NOT LIKE '_cf_%' ORDER BY name",
     ).all<{ name: string }>();
     expect(results.map((r) => r.name)).toEqual(
-      expect.arrayContaining(["api_key", "area", "category_map", "ingest_run", "publisher", "publisher_stat_daily", "report_agg"]),
+      expect.arrayContaining(["api_key", "area", "category_map", "ingest_run", "place_stat_daily", "publisher", "report_agg"]),
     );
   });
 });

@@ -1,5 +1,6 @@
 import { getPlace, SearchError, searchPlaces } from "./search";
 import type { Env } from "./env";
+import { countPlaces, type Recorder } from "./stats";
 
 // Stateless MCP over Streamable HTTP: every POST is one JSON-RPC message
 // answered with plain JSON, so no sessions or SSE are needed.
@@ -38,27 +39,28 @@ type Rpc = { jsonrpc: "2.0"; id?: string | number | null; method: string; params
 
 const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : typeof v === "string" && v.trim() && Number.isFinite(+v) ? +v : undefined);
 
-async function callTool(env: Env, name: string, args: Record<string, unknown>) {
+async function callTool(env: Env, record: Recorder, name: string, args: Record<string, unknown>) {
   const text = (data: unknown, isError = false) => ({
     content: [{ type: "text", text: JSON.stringify(data) }],
     ...(isError ? { isError: true } : { structuredContent: data }),
   });
   try {
     if (name === "find_places") {
-      return text(
-        await searchPlaces(env, {
-          q: typeof args.query === "string" ? args.query : undefined,
-          near: typeof args.near === "string" ? args.near : undefined,
-          lat: num(args.lat),
-          lng: num(args.lng),
-          radiusM: num(args.radius_m),
-          openNow: args.open_now === true,
-          limit: num(args.limit),
-        }),
-      );
+      const result = await searchPlaces(env, {
+        q: typeof args.query === "string" ? args.query : undefined,
+        near: typeof args.near === "string" ? args.near : undefined,
+        lat: num(args.lat),
+        lng: num(args.lng),
+        radiusM: num(args.radius_m),
+        openNow: args.open_now === true,
+        limit: num(args.limit),
+      });
+      record(countPlaces(env, result.results.map((r) => r.id), "appearances", "mcp"));
+      return text(result);
     }
     if (name === "get_place") {
       const place = typeof args.id === "string" ? await getPlace(env, args.id) : null;
+      if (place) record(countPlaces(env, [place.id as string], "lookups", "mcp"));
       return place ? text(place) : text({ error: "not_found" }, true);
     }
   } catch (e) {
@@ -68,7 +70,7 @@ async function callTool(env: Env, name: string, args: Record<string, unknown>) {
   return null;
 }
 
-async function handle(env: Env, msg: Rpc): Promise<object | null> {
+async function handle(env: Env, record: Recorder, msg: Rpc): Promise<object | null> {
   const ok = (result: unknown) => ({ jsonrpc: "2.0", id: msg.id ?? null, result });
   const fail = (code: number, message: string) => ({ jsonrpc: "2.0", id: msg.id ?? null, error: { code, message } });
   if (msg.id === undefined) return null; // notifications get no reply
@@ -90,7 +92,7 @@ async function handle(env: Env, msg: Rpc): Promise<object | null> {
     case "tools/call": {
       const name = String(msg.params?.name ?? "");
       const args = (msg.params?.arguments ?? {}) as Record<string, unknown>;
-      const result = await callTool(env, name, args);
+      const result = await callTool(env, record, name, args);
       return result ? ok(result) : fail(-32602, `Unknown tool: ${name}`);
     }
     default:
@@ -98,7 +100,7 @@ async function handle(env: Env, msg: Rpc): Promise<object | null> {
   }
 }
 
-export async function mcpHandler(env: Env, request: Request): Promise<Response> {
+export async function mcpHandler(env: Env, request: Request, record: Recorder): Promise<Response> {
   if (request.method === "GET") return new Response("Lokadex MCP: POST JSON-RPC here.", { status: 405, headers: { allow: "POST" } });
   if (request.method !== "POST") return new Response(null, { status: 405, headers: { allow: "POST" } });
   let body: unknown;
@@ -114,7 +116,7 @@ export async function mcpHandler(env: Env, request: Request): Promise<Response> 
     if (msgs.every((m) => m && typeof m === "object" && !("method" in m))) return new Response(null, { status: 202 });
     return Response.json({ jsonrpc: "2.0", id: null, error: { code: -32600, message: "Invalid request" } }, { status: 400 });
   }
-  const replies = (await Promise.all(msgs.map((m) => handle(env, m)))).filter(Boolean);
+  const replies = (await Promise.all(msgs.map((m) => handle(env, record, m)))).filter(Boolean);
   if (!replies.length) return new Response(null, { status: 202 });
   return Response.json(batch ? replies : replies[0]);
 }
