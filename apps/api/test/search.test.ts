@@ -101,7 +101,7 @@ describe("mcp", () => {
     expect(init.result.protocolVersion).toBe("2025-06-18");
     expect((await rpc("notifications/initialized", undefined, null)).status).toBe(202);
     const list = (await (await rpc("tools/list")).json()) as any;
-    expect(list.result.tools.map((t: any) => t.name)).toEqual(["find_places", "get_place"]);
+    expect(list.result.tools.map((t: any) => t.name)).toEqual(["find_places", "get_place", "check_place_control"]);
     expect(list.result.tools.every((t: any) => t.annotations.readOnlyHint)).toBe(true);
   });
 

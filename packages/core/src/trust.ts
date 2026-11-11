@@ -5,8 +5,9 @@
 // so every decision can be reversed by better evidence later.
 
 export type Evidence = {
-  // The place's open-data website host is the publisher's site, and that
-  // site's profile names the place back.
+  // The place's open-data website domain names this publisher and place back,
+  // by its /.well-known/lokadex.json or a `_lokadex` DNS TXT record (a
+  // control proof, `@lokadex/spec` control.ts).
   bidirectionalDomain?: boolean;
   samePhone?: boolean;
   sameSocial?: boolean;

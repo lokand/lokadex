@@ -12,9 +12,13 @@ see its `docs/place-publishing.md` for what publishers send.
   queues. Trust comes from `packages/core/src/trust.ts`: deterministic
   evidence scoring and fixed precedence, the same for every publisher.
   Nothing is overwritten — a record that doesn't clear the bar becomes its
-  own listing — so every decision is reversible.
+  own listing — so every decision is reversible. "Claiming" a place is a
+  control proof on its website domain (`docs/spec.md`): public, re-checkable
+  evidence, not an account.
 - **Labels state evidence, never "verified".** `listed` (open data) or
   `published` (attached publisher data).
+- **`docs/spec.md` is the open standard.** Change it with the code, keep it
+  vendor-neutral, and only ever loosen what a v1 reader accepts.
 - **Publisher content is untrusted data.** Parse defensively
   (`packages/spec/src/profile.ts` must never throw), bound sizes, escape on
   output, never execute it.
