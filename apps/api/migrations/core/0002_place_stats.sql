@@ -14,7 +14,3 @@ CREATE TABLE place_stat_daily (
   lookups INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (place_id, day, channel)
 ) WITHOUT ROWID;
-
--- Never written; per-place counts above replace it (a publisher's view is a
--- join through place_source).
-DROP TABLE publisher_stat_daily;
