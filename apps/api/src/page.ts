@@ -24,7 +24,7 @@ footer{color:var(--muted);font-size:13px;margin-top:32px}footer a{color:inherit}
 <label class="chk"><input type="checkbox" id="open"> Open now only</label>
 <div class="ex"></div>
 <p class="m" id="status"></p><ol id="out"></ol>
-<footer>REST: <code>/v1/places/search?q=&near=</code> · MCP: <code>/mcp</code> · Lokadex is a Lokand project · Place data: Foursquare Open Source Places (Apache-2.0)</footer>
+<footer>REST: <code>/v1/places/search?q=&near=</code>, <code>/v1/places/{id}</code>, <code>/v1/places/{id}/stats</code> · MCP: <code>/mcp</code> · Lokadex is a Lokand project · Place data: Foursquare Open Source Places (Apache-2.0)</footer>
 </main><script>
 const f=document.getElementById('f'),out=document.getElementById('out'),st=document.getElementById('status');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
